@@ -13,10 +13,10 @@ describe "Array#hash" do
 
   it "properly handles recursive arrays" do
     empty = ArraySpecs.empty_recursive_array
-    -> { empty.hash }.should_not raise_error
+    empty.hash.should be_an_instance_of(Integer)
 
     array = ArraySpecs.recursive_array
-    -> { array.hash }.should_not raise_error
+    array.hash.should be_an_instance_of(Integer)
   end
 
   it "returns the same hash for equal recursive arrays" do

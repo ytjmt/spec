@@ -46,11 +46,13 @@ describe "Array#rotate" do
   end
 
   it "does not mutate the receiver" do
-    -> {
-      [].freeze.rotate
-      [2].freeze.rotate(2)
-      [1,2,3].freeze.rotate(-3)
-    }.should_not raise_error
+    a = [1, 2, 3, 4, 5]
+    a.rotate
+    a.should == [1, 2, 3, 4, 5]
+
+    [].freeze.rotate.should == []
+    [2].freeze.rotate(2).should == [2]
+    [1, 2, 3].freeze.rotate(-3).should == [1, 2, 3]
   end
 
   it "does not return self" do

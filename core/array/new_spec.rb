@@ -27,7 +27,7 @@ describe "Array.new with no arguments" do
 
   it "does not use the given block" do
     -> {
-      -> { Array.new { raise } }.should_not raise_error
+      Array.new { raise }.should be_empty
     }.should complain(/warning: given block not used/, verbose: true)
   end
 end
@@ -39,7 +39,7 @@ describe "Array.new with (array)" do
   end
 
   it "does not use the given block" do
-    ->{ Array.new([1, 2]) { raise } }.should_not raise_error
+    Array.new([1, 2]) { raise }.should == [1, 2]
   end
 
   it "calls #to_ary to convert the value to an array" do

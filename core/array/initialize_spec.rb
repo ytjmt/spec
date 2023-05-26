@@ -54,7 +54,7 @@ describe "Array#initialize with no arguments" do
 
   it "does not use the given block" do
     -> {
-      -> { [1, 2, 3].send(:initialize) { raise } }.should_not raise_error
+      [1, 2, 3].send(:initialize) { raise }.should be_empty
     }.should complain(/#{__FILE__}:#{__LINE__-1}: warning: given block not used/, verbose: true)
   end
 end
@@ -66,7 +66,8 @@ describe "Array#initialize with (array)" do
   end
 
   it "does not use the given block" do
-    ->{ [1, 2, 3].send(:initialize) { raise } }.should_not raise_error
+    b = [4, 5, 6]
+    [1, 2, 3].send(:initialize, b) { raise }.should == b
   end
 
   it "calls #to_ary to convert the value to an array" do
